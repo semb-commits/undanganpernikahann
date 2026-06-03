@@ -7,6 +7,7 @@
   
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,13 +22,13 @@
     .page {
       display: none;
       min-height: 100vh;
-      padding: 40px 20px;
-      animation: fadeIn 0.5s ease;
+      padding: 40px 20px 110px;
+      animation: fadeIn 0.4s ease;
     }
     .page.active { display: block; }
     
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(15px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -37,22 +38,25 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+      padding-bottom: 40px;
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(8px);
-      padding: 40px 30px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      padding: 35px 25px;
       border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
       max-width: 600px;
-      margin: 0 auto;
+      margin: 0 auto 20px;
       border: 1px solid rgba(212, 175, 55, 0.3);
+      position: relative;
+      z-index: 1;
     }
 
     .photo-couple {
-      width: 200px;
-      height: 200px;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
       object-fit: cover;
       border: 4px solid #D4AF37;
@@ -62,7 +66,7 @@
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 36px;
+      font-size: 32px;
       color: #B8860B;
       margin-bottom: 10px;
     }
@@ -70,11 +74,12 @@
     h2 {
       font-family: 'Playfair Display', serif;
       color: #B8860B;
-      font-size: 28px;
+      font-size: 26px;
       margin-bottom: 15px;
       text-align: center;
     }
 
+    h3 { color: #0A192F; margin-bottom: 10px; }
     p { line-height: 1.7; margin-bottom: 12px; color: #555; }
 
     .btn {
@@ -91,23 +96,29 @@
       margin: 8px;
       transition: 0.3s;
     }
-    .btn:hover { transform: translateY(-2px); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212,175,55,0.4); }
+
+    .btn-wa {
+      background: #25D366;
+      color: white;
+    }
 
     .countdown {
       display: flex;
       justify-content: space-around;
       text-align: center;
       margin: 20px 0;
+      gap: 8px;
     }
     .countdown div {
       background: #0A192F;
       color: white;
-      padding: 12px;
+      padding: 12px 8px;
       border-radius: 12px;
-      min-width: 65px;
+      flex: 1;
     }
     .countdown span {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 600;
       color: #D4AF37;
       display: block;
@@ -122,40 +133,33 @@
       font-family: 'Poppins', sans-serif;
       background: rgba(255,255,255,0.8);
     }
-    form button {
-      width: 100%;
-      background: #0A192F;
-      color: white;
-      padding: 14px;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 16px;
-    }
 
     .nav-bottom {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: white;
-      padding: 15px;
+      background: #fff;
+      padding: 12px 0;
       display: flex;
       justify-content: space-around;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-      z-index: 100;
+      box-shadow: 0 -2px 15px rgba(0,0,0,0.15);
+      z-index: 9999;
+      border-top: 1px solid #eee;
     }
     .nav-bottom button {
       background: none;
       border: none;
-      color: #777;
-      font-size: 14px;
+      color: #888;
+      font-size: 22px;
       cursor: pointer;
+      padding: 8px 20px;
+      transition: 0.2s;
     }
-    .nav-bottom button.active { color: #D4AF37; font-weight: 600; }
-
-    .content-padding { padding-bottom: 80px; }
+    .nav-bottom button.active { 
+      color: #D4AF37; 
+      transform: scale(1.15);
+    }
   </style>
 </head>
 <body>
@@ -172,83 +176,93 @@
 
   <!-- PAGE 2: MEMPELAI -->
   <div class="page" id="page2">
-    <div class="content-padding">
-      <div class="card" data-aos="fade-up">
-        <h2>Assalamualaikum Warahmatullahi Wabarakatuh</h2>
-        <p>Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.</p>
-      </div>
+    <div class="card" data-aos="fade-up">
+      <h2>Assalamualaikum Warahmatullahi Wabarakatuh</h2>
+      <p>Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.</p>
+    </div>
 
-      <div class="card" data-aos="fade-up" style="margin-top: 20px;">
-        <h2>Mempelai</h2>
-        <img src="mempelai.jpg" alt="Mempelai" class="photo-couple">
-        <h3 style="text-align:center;">[NAMA LENGKAP PRIA] & [NAMA LENGKAP WANITA]</h3>
-        <p style="text-align:center;">Putra/Putri dari keluarga [NAMA KELUARGA]</p>
-      </div>
+    <div class="card" data-aos="fade-up">
+      <h2>Mempelai</h2>
+      <img src="mempelai.jpg" alt="Mempelai" class="photo-couple" onerror="this.style.display='none'">
+      <h3 style="text-align:center;">[NAMA LENGKAP PRIA] & [NAMA LENGKAP WANITA]</h3>
+      <p style="text-align:center;">Putra/Putri dari keluarga [NAMA KELUARGA]</p>
+    </div>
 
-      <div class="card" data-aos="fade-up" style="margin-top: 20px;">
-        <h2>Menuju Hari Bahagia</h2>
-        <div class="countdown" id="countdown">
-          <div><span id="days">00</span>Hari</div>
-          <div><span id="hours">00</span>Jam</div>
-          <div><span id="minutes">00</span>Menit</div>
-          <div><span id="seconds">00</span>Detik</div>
-        </div>
+    <div class="card" data-aos="fade-up">
+      <h2>Menuju Hari Bahagia</h2>
+      <div class="countdown" id="countdown">
+        <div><span id="days">00</span>Hari</div>
+        <div><span id="hours">00</span>Jam</div>
+        <div><span id="minutes">00</span>Menit</div>
+        <div><span id="seconds">00</span>Detik</div>
       </div>
     </div>
   </div>
 
   <!-- PAGE 3: ACARA -->
   <div class="page" id="page3">
-    <div class="content-padding">
-      <div class="card" data-aos="fade-up">
-        <h2>Detail Acara</h2>
-        <h3>Akad Nikah</h3>
-        <p><strong>Hari, Tanggal:</strong> [HARI], [TANGGAL]</p>
-        <p><strong>Waktu:</strong> [JAM] WIB</p>
-        <p><strong>Tempat:</strong> [NAMA GEDUNG]</p>
-        <p>[ALAMAT LENGKAP]</p>
-        
-        <div style="margin-top: 20px;">
-          <a href="[LINK_GOOGLE_MAPS]" class="btn" target="_blank">Buka Lokasi</a>
-        </div>
-      </div>
+    <div class="card" data-aos="fade-up">
+      <h2>Detail Acara</h2>
+      <h3>Akad Nikah</h3>
+      <p><strong>Hari, Tanggal:</strong> [HARI], [TANGGAL]</p>
+      <p><strong>Waktu:</strong> [JAM] WIB</p>
+      <p><strong>Tempat:</strong> [NAMA GEDUNG]</p>
+      <p>[ALAMAT LENGKAP]</p>
+      <a href="[LINK_GOOGLE_MAPS]" class="btn" target="_blank" style="margin-top:15px;">Buka Lokasi</a>
+    </div>
 
-      <div class="card" data-aos="fade-up" style="margin-top: 20px;">
-        <h2>Konfirmasi Kehadiran</h2>
-        <form action="https://formspree.io/f/[KODE_FORMSPREE]" method="POST">
-          <input type="text" name="nama" placeholder="Nama Anda" required>
-          <select name="kehadiran" required>
-            <option value="">Konfirmasi Kehadiran</option>
-            <option value="Hadir">Hadir</option>
-            <option value="Tidak Hadir">Tidak Hadir</option>
-          </select>
-          <textarea name="ucapan" rows="3" placeholder="Ucapan & doa"></textarea>
-          <button type="submit">Kirim</button>
-        </form>
-      </div>
+    <div class="card" data-aos="fade-up">
+      <h2>Lokasi</h2>
+      <iframe src="[EMBED_GOOGLE_MAPS]" width="100%" height="220" style="border:0; border-radius: 12px;" loading="lazy"></iframe>
     </div>
   </div>
 
-  <!-- NAV BOTTOM -->
+  <!-- PAGE 4: RSVP WA -->
+  <div class="page" id="page4">
+    <div class="card" data-aos="fade-up">
+      <h2>Konfirmasi Kehadiran</h2>
+      <p>Silakan isi form di bawah ini, lalu klik tombol WhatsApp untuk mengirim konfirmasi.</p>
+      
+      <form id="rsvpForm">
+        <input type="text" id="nama" placeholder="Nama Anda" required>
+        <select id="kehadiran" required>
+          <option value="">Konfirmasi Kehadiran</option>
+          <option value="Hadir">Hadir</option>
+          <option value="Tidak Hadir">Tidak Hadir</option>
+        </select>
+        <input type="number" id="jumlah" placeholder="Jumlah Tamu" min="1" max="10">
+        <textarea id="ucapan" rows="3" placeholder="Ucapan & doa"></textarea>
+        <button type="button" class="btn btn-wa" onclick="kirimWA()">
+          <i class="fa-brands fa-whatsapp"></i> Kirim via WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- NAV BOTTOM 4 ICON -->
   <div class="nav-bottom">
-    <button onclick="goToPage(1)" id="nav1" class="active">Home</button>
-    <button onclick="goToPage(2)" id="nav2">Mempelai</button>
-    <button onclick="goToPage(3)" id="nav3">Acara</button>
+    <button onclick="goToPage(1)" id="nav1" class="active"><i class="fa-solid fa-house"></i></button>
+    <button onclick="goToPage(2)" id="nav2"><i class="fa-solid fa-heart"></i></button>
+    <button onclick="goToPage(3)" id="nav3"><i class="fa-solid fa-calendar-day"></i></button>
+    <button onclick="goToPage(4)" id="nav4"><i class="fa-solid fa-envelope"></i></button>
   </div>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({ duration: 800, once: true });
+    AOS.init({ duration: 700, once: true });
 
     function goToPage(pageNum) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById('page' + pageNum).classList.add('active');
+      
       document.querySelectorAll('.nav-bottom button').forEach(b => b.classList.remove('active'));
       document.getElementById('nav' + pageNum).classList.add('active');
+      
       window.scrollTo(0,0);
     }
 
-    const countDownDate = new Date("[TAHUN]-[BULAN]-[TANGGAL]T[JAM]:00:00").getTime();
+    // Countdown
+    const countDownDate = new Date("2025-12-25T09:00:00").getTime();
     const x = setInterval(function() {
       const now = new Date().getTime();
       const distance = countDownDate - now;
@@ -262,6 +276,30 @@
         clearInterval(x);
       }
     }, 1000);
+
+    // Kirim ke WhatsApp
+    function kirimWA() {
+      const nama = document.getElementById('nama').value;
+      const kehadiran = document.getElementById('kehadiran').value;
+      const jumlah = document.getElementById('jumlah').value || '1';
+      const ucapan = document.getElementById('ucapan').value;
+
+      if(!nama || !kehadiran) {
+        alert('Mohon isi nama dan konfirmasi kehadiran');
+        return;
+      }
+
+      const pesan = `Assalamualaikum%0A%0A
+Konfirmasi Kehadiran:%0A
+Nama: ${nama}%0A
+Kehadiran: ${kehadiran}%0A
+Jumlah Tamu: ${jumlah}%0A
+Ucapan: ${ucapan}%0A%0A
+Terima kasih.`;
+
+      const noWA = '[NOMOR_WA]'; // Format 628xxxxxxxxxx tanpa +
+      window.open(`https://wa.me/${noWA}?text=${pesan}`, '_blank');
+    }
   </script>
 
 </body>
