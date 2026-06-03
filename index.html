@@ -1,309 +1,267 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Undangan Pernikahan [NAMA PRIA] & [NAMA WANITA]</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body {
-      font-family: 'Poppins', sans-serif;
-      color: #333;
-      background: #FDF6EC;
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan [NAMA PRIA] & [NAMA WANITA]</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    .page {
-      display: none;
-      min-height: 100vh;
-      width: 100%;
-      padding: 40px 20px 110px;
-      position: relative;
-    }
-    .page.active { 
-      display: block; 
-    }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #000; /* Hitam full */
+  color: #fff;
+  overflow-x: hidden;
+}
 
-    /* PAGE 1 - GAMBAR CHIBI FULL TRANSPARAN */
-    #page1 {
-      background: url('chibi.png') center no-repeat;
-      background-size: contain;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      padding-bottom: 120px;
-    }
+/* PAGE SYSTEM */
+.page {
+  display: none;
+  min-height: 100vh;
+  width: 100%;
+  padding: 30px 20px 100px;
+}
+.page.active { display: block; }
 
-    /* CARD TRANSPARAN TANPA HITAM */
-    .card {
-      background: transparent;
-      padding: 30px 25px;
-      border-radius: 20px;
-      max-width: 600px;
-      margin: 0 auto 20px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
+/* PAGE 1 - CHIBI FULL DI BELAKANG */
+#page1 {
+  background: url('chibi.png') center bottom no-repeat;
+  background-size: contain;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 130px;
+}
 
-    /* PAGE 1 KARTUNYA PUNYA BACKGROUND SENDIRI */
-    #page1 .card {
-      background: rgba(255, 255, 255, 0.85);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-      backdrop-filter: blur(5px);
-    }
+/* CARD TRANSPARAN */
+.card {
+  background: rgba(0,0,0,0.5); /* Hitam 50% biar tulisan kebaca */
+  padding: 25px 20px;
+  border-radius: 18px;
+  max-width: 500px;
+  margin: 0 auto 20px;
+  text-align: center;
+  border: 1px solid rgba(212,175,55,0.4);
+}
 
-    .photo-couple {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #D4AF37;
-      margin: 20px auto;
-      display: block;
-    }
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  color: #D4AF37;
+  margin: 10px 0;
+}
+h2 {
+  font-family: 'Playfair Display', serif;
+  color: #D4AF37;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+p { line-height: 1.6; color: #eee; margin-bottom: 10px; }
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 32px;
-      color: #B8860B;
-      margin-bottom: 10px;
-    }
+.btn {
+  display: inline-block;
+  background: #D4AF37;
+  color: #000;
+  padding: 14px 28px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+  position: relative;
+  z-index: 9999; /* Pasti di atas */
+}
 
-    h2 {
-      font-family: 'Playfair Display', serif;
-      color: #B8860B;
-      font-size: 26px;
-      margin-bottom: 15px;
-      text-align: center;
-    }
+.btn-wa { background: #25D366; color: #fff; }
 
-    h3 { color: #0A192F; margin-bottom: 10px; }
-    p { line-height: 1.7; margin-bottom: 12px; color: #555; }
+.photo-couple {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #D4AF37;
+  margin: 15px auto;
+}
 
-    .btn {
-      display: inline-block;
-      background: #D4AF37;
-      color: #0A192F;
-      padding: 14px 28px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      margin: 8px;
-      position: relative;
-      z-index: 999;
-      pointer-events: auto;
-    }
+.countdown {
+  display: flex;
+  gap: 8px;
+  margin: 20px 0;
+}
+.countdown div {
+  flex: 1;
+  background: rgba(0,0,0,0.7);
+  padding: 12px 5px;
+  border-radius: 10px;
+}
+.countdown span {
+  display: block;
+  font-size: 22px;
+  color: #D4AF37;
+  font-weight: 600;
+}
 
-    .btn-wa {
-      background: #25D366;
-      color: white;
-    }
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.95);
+  color: #000;
+  font-family: 'Poppins', sans-serif;
+}
 
-    .countdown {
-      display: flex;
-      justify-content: space-around;
-      text-align: center;
-      margin: 20px 0;
-      gap: 8px;
-    }
-    .countdown div {
-      background: #0A192F;
-      color: white;
-      padding: 12px 8px;
-      border-radius: 12px;
-      flex: 1;
-    }
-    .countdown span {
-      font-size: 22px;
-      font-weight: 600;
-      color: #D4AF37;
-      display: block;
-    }
+/* NAV BOTTOM - PALING PENTING */
+.nav-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #111;
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-around;
+  z-index: 10000; /* Paling atas */
+  border-top: 1px solid #333;
+}
+.nav-bottom button {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px 25px;
+  position: relative;
+  z-index: 10001;
+}
+.nav-bottom button.active { color: #D4AF37; }
 
-    form input, form select, form textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #DDD;
-      border-radius: 8px;
-      font-family: 'Poppins', sans-serif;
-      background: rgba(255,255,255,0.95);
-      color: #333;
-    }
-
-    .nav-bottom {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #fff;
-      padding: 12px 0;
-      display: flex;
-      justify-content: space-around;
-      box-shadow: 0 -2px 15px rgba(0,0,0,0.15);
-      z-index: 9999;
-    }
-    .nav-bottom button {
-      background: none;
-      border: none;
-      color: #888;
-      font-size: 22px;
-      cursor: pointer;
-      padding: 8px 20px;
-      pointer-events: auto;
-    }
-    .nav-bottom button.active { 
-      color: #D4AF37; 
-      transform: scale(1.15);
-    }
-  </style>
+/* HILANGKAN SEMUA OVERLAY */
+* { pointer-events: auto; }
+</style>
 </head>
 <body>
 
-  <!-- PAGE 1: PEMBUKA -->
-  <div class="page active" id="page1">
-    <div class="card" data-aos="fade-up">
-      <p>The Wedding Of</p>
-      <h1>[NAMA PRIA] & [NAMA WANITA]</h1>
-      <p>[TANGGAL]</p>
-      <button class="btn" onclick="goToPage(2)">Buka Undangan</button>
-    </div>
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <div class="card">
+    <p>The Wedding Of</p>
+    <h1>[NAMA PRIA] & [NAMA WANITA]</h1>
+    <p>[TANGGAL]</p>
+    <button class="btn" onclick="goToPage(2)">Buka Undangan</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <div class="card">
+    <h2>Assalamualaikum</h2>
+    <p>Kami mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.</p>
+  </div>
+  
+  <div class="card">
+    <h2>Mempelai</h2>
+    <img src="mempelai.jpg" class="photo-couple" onerror="this.style.display='none'">
+    <h3>[NAMA LENGKAP PRIA] & [NAMA LENGKAP WANITA]</h3>
   </div>
 
-  <!-- PAGE 2: MEMPELAI -->
-  <div class="page" id="page2">
-    <div class="card" data-aos="fade-up">
-      <h2>Assalamualaikum</h2>
-      <p>Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.</p>
-    </div>
-
-    <div class="card" data-aos="fade-up">
-      <h2>Mempelai</h2>
-      <img src="mempelai.jpg" alt="Mempelai" class="photo-couple" onerror="this.style.display='none'">
-      <h3 style="text-align:center;">[NAMA LENGKAP PRIA] & [NAMA LENGKAP WANITA]</h3>
-    </div>
-
-    <div class="card" data-aos="fade-up">
-      <h2>Menuju Hari Bahagia</h2>
-      <div class="countdown" id="countdown">
-        <div><span id="days">00</span>Hari</div>
-        <div><span id="hours">00</span>Jam</div>
-        <div><span id="minutes">00</span>Menit</div>
-        <div><span id="seconds">00</span>Detik</div>
-      </div>
+  <div class="card">
+    <h2>Menuju Hari Bahagia</h2>
+    <div class="countdown" id="countdown">
+      <div><span id="days">00</span>Hari</div>
+      <div><span id="hours">00</span>Jam</div>
+      <div><span id="minutes">00</span>Menit</div>
+      <div><span id="seconds">00</span>Detik</div>
     </div>
   </div>
+</div>
 
-  <!-- PAGE 3: ACARA -->
-  <div class="page" id="page3">
-    <div class="card" data-aos="fade-up">
-      <h2>Detail Acara</h2>
-      <h3>Akad Nikah</h3>
-      <p><strong>Hari, Tanggal:</strong> [HARI], [TANGGAL]</p>
-      <p><strong>Waktu:</strong> [JAM] WIB</p>
-      <p><strong>Tempat:</strong> [NAMA GEDUNG]</p>
-      <p>[ALAMAT LENGKAP]</p>
-      <a href="[LINK_GOOGLE_MAPS]" class="btn" target="_blank" style="margin-top:15px;">Buka Lokasi</a>
-    </div>
-
-    <div class="card" data-aos="fade-up">
-      <h2>Lokasi</h2>
-      <iframe src="[EMBED_GOOGLE_MAPS]" width="100%" height="220" style="border:0; border-radius: 12px;" loading="lazy"></iframe>
-    </div>
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+  <div class="card">
+    <h2>Detail Acara</h2>
+    <h3>Akad Nikah</h3>
+    <p><strong>[HARI], [TANGGAL]</strong></p>
+    <p>[JAM] WIB</p>
+    <p>[NAMA GEDUNG]</p>
+    <p>[ALAMAT]</p>
+    <a href="[LINK_GOOGLE_MAPS]" class="btn" target="_blank">Buka Lokasi</a>
   </div>
-
-  <!-- PAGE 4: RSVP WA -->
-  <div class="page" id="page4">
-    <div class="card" data-aos="fade-up">
-      <h2>Konfirmasi Kehadiran</h2>
-      <p>Silakan isi form di bawah ini, lalu klik tombol WhatsApp.</p>
-      
-      <form id="rsvpForm">
-        <input type="text" id="nama" placeholder="Nama Anda" required>
-        <select id="kehadiran" required>
-          <option value="">Konfirmasi Kehadiran</option>
-          <option value="Hadir">Hadir</option>
-          <option value="Tidak Hadir">Tidak Hadir</option>
-        </select>
-        <input type="number" id="jumlah" placeholder="Jumlah Tamu" min="1" max="10">
-        <textarea id="ucapan" rows="3" placeholder="Ucapan & doa"></textarea>
-        <button type="button" class="btn btn-wa" onclick="kirimWA()">
-          <i class="fa-brands fa-whatsapp"></i> Kirim via WhatsApp
-        </button>
-      </form>
-    </div>
+  
+  <div class="card">
+    <h2>Lokasi</h2>
+    <iframe src="[EMBED_GOOGLE_MAPS]" width="100%" height="200" style="border:0; border-radius: 12px;" loading="lazy"></iframe>
   </div>
+</div>
 
-  <!-- NAV BOTTOM 4 ICON -->
-  <div class="nav-bottom">
-    <button onclick="goToPage(1)" id="nav1" class="active"><i class="fa-solid fa-house"></i></button>
-    <button onclick="goToPage(2)" id="nav2"><i class="fa-solid fa-heart"></i></button>
-    <button onclick="goToPage(3)" id="nav3"><i class="fa-solid fa-calendar-day"></i></button>
-    <button onclick="goToPage(4)" id="nav4"><i class="fa-solid fa-envelope"></i></button>
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+  <div class="card">
+    <h2>Konfirmasi Kehadiran</h2>
+    <input type="text" id="nama" placeholder="Nama Anda" required>
+    <select id="kehadiran" required>
+      <option value="">Konfirmasi</option>
+      <option value="Hadir">Hadir</option>
+      <option value="Tidak Hadir">Tidak Hadir</option>
+    </select>
+    <input type="number" id="jumlah" placeholder="Jumlah Tamu" min="1">
+    <textarea id="ucapan" rows="3" placeholder="Ucapan"></textarea>
+    <button class="btn btn-wa" onclick="kirimWA()">
+      <i class="fa-brands fa-whatsapp"></i> Kirim via WhatsApp
+    </button>
   </div>
+</div>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      AOS.init({ duration: 700, once: true });
-    });
+<!-- NAV BOTTOM -->
+<div class="nav-bottom">
+  <button onclick="goToPage(1)" id="nav1" class="active"><i class="fa-solid fa-house"></i></button>
+  <button onclick="goToPage(2)" id="nav2"><i class="fa-solid fa-heart"></i></button>
+  <button onclick="goToPage(3)" id="nav3"><i class="fa-solid fa-calendar-day"></i></button>
+  <button onclick="goToPage(4)" id="nav4"><i class="fa-solid fa-envelope"></i></button>
+</div>
 
-    function goToPage(pageNum) {
-      document.querySelectorAll('.page').forEach(p => {
-        p.classList.remove('active');
-      });
-      document.getElementById('page' + pageNum).classList.add('active');
-      
-      document.querySelectorAll('.nav-bottom button').forEach(b => {
-        b.classList.remove('active');
-      });
-      document.getElementById('nav' + pageNum).classList.add('active');
-      
-      AOS.refresh();
-      window.scrollTo(0,0);
-    }
+<script>
+// FUNCTION GANTI HALAMAN - SIMPLE
+function goToPage(n) {
+  // Sembunyiin semua
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-bottom button').forEach(b => b.classList.remove('active'));
+  
+  // Tunjukin yang dipilih
+  document.getElementById('page' + n).classList.add('active');
+  document.getElementById('nav' + n).classList.add('active');
+  
+  window.scrollTo(0,0);
+}
 
-    const countDownDate = new Date("2025-12-25T09:00:00").getTime();
-    const x = setInterval(function() {
-      const now = new Date().getTime();
-      const distance = countDownDate - now;
-      if(distance > 0) {
-        document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-        document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
-      } else {
-        document.getElementById("countdown").innerHTML = "<h3>Acara Sedang Berlangsung</h3>";
-        clearInterval(x);
-      }
-    }, 1000);
+// COUNTDOWN
+const countDownDate = new Date("2025-12-25T09:00:00").getTime();
+setInterval(function() {
+  const now = new Date().getTime();
+  const distance = countDownDate - now;
+  if(distance > 0) {
+    document.getElementById("days").innerText = Math.floor(distance / 86400000);
+    document.getElementById("hours").innerText = Math.floor((distance % 86400000) / 3600000);
+    document.getElementById("minutes").innerText = Math.floor((distance % 3600000) / 60000);
+    document.getElementById("seconds").innerText = Math.floor((distance % 60000) / 1000);
+  }
+}, 1000);
 
-    function kirimWA() {
-      const nama = document.getElementById('nama').value;
-      const kehadiran = document.getElementById('kehadiran').value;
-      const jumlah = document.getElementById('jumlah').value || '1';
-      const ucapan = document.getElementById('ucapan').value;
-
-      if(!nama || !kehadiran) {
-        alert('Mohon isi nama dan konfirmasi kehadiran');
-        return;
-      }
-
-      const pesan = `Assalamualaikum%0A%0AKonfirmasi Kehadiran:%0ANama: ${nama}%0AKehadiran: ${kehadiran}%0AJumlah Tamu: ${jumlah}%0AUcapan: ${ucapan}%0A%0ATerima kasih.`;
-      const noWA = '[NOMOR_WA]'; 
-      window.open(`https://wa.me/${noWA}?text=${pesan}`, '_blank');
-    }
-  </script>
+// KIRIM WA
+function kirimWA() {
+  const nama = document.getElementById('nama').value;
+  const kehadiran = document.getElementById('kehadiran').value;
+  if(!nama || !kehadiran) return alert('Isi nama & kehadiran');
+  
+  const pesan = `Konfirmasi Kehadiran:%0ANama: ${nama}%0AKehadiran: ${kehadiran}%0AJumlah: ${document.getElementById('jumlah').value || 1}%0AUcapan: ${document.getElementById('ucapan').value}`;
+  window.open(`https://wa.me/[NOMOR_WA]?text=${pesan}`, '_blank');
+}
+</script>
 
 </body>
   </html>
