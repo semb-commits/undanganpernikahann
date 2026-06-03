@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Pernikahan [NAMA PRIA] & [NAMA WANITA]</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      background: #FDF6EC;
+    }
+
+    /* Halaman Pembuka */
+    .hero {
+      height: 100vh;
+      background: url('chibi.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.4);
+    }
+
+    .hero-content {
+      position: relative;
+      color: white;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .btn-open {
+      background: #D4AF37;
+      color: #0A192F;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    /* Konten Utama */
+    .main-content {
+      display: none;
+      padding: 40px 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .main-content.active {
+      display: block;
+    }
+
+    section {
+      background: white;
+      padding: 30px 25px;
+      margin-bottom: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      color: #B8860B;
+      font-size: 28px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    h3 {
+      color: #0A192F;
+      margin-bottom: 10px;
+    }
+
+    p {
+      line-height: 1.7;
+      margin-bottom: 12px;
+      color: #555;
+    }
+
+    .date-box {
+      background: #FFF8E1;
+      padding: 20px;
+      border-radius: 12px;
+      border-left: 4px solid #D4AF37;
+      margin: 20px 0;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #D4AF37;
+      color: #0A192F;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    /* Form RSVP */
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #DDD;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    form button {
+      width: 100%;
+      background: #0A192F;
+      color: white;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    form button:hover {
+      background: #112240;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #777;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HALAMAN PEMBUKA -->
+  <div class="hero" id="hero">
+    <div class="hero-content">
+      <p>The Wedding Of</p>
+      <h1>[NAMA PRIA] & [NAMA WANITA]</h1>
+      <p>[TANGGAL]</p>
+      <button class="btn-open" onclick="openInvitation()">Buka Undangan</button>
+    </div>
+  </div>
+
+  <!-- KONTEN UTAMA -->
+  <div class="main-content" id="main">
+    
+    <!-- KATA SAMBUTAN -->
+    <section>
+      <h2>Assalamualaikum Warahmatullahi Wabarakatuh</h2>
+      <p>Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.</p>
+      <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
+    </section>
+
+    <!-- MEMPELAI -->
+    <section style="text-align: center;">
+      <h2>Mempelai</h2>
+      <h3>[NAMA LENGKAP PRIA]</h3>
+      <p>Putra dari Bpk. [NAMA AYAH] & Ibu [NAMA IBU]</p>
+      
+      <p style="font-size: 24px; margin: 20px 0;">&</p>
+      
+      <h3>[NAMA LENGKAP WANITA]</h3>
+      <p>Putri dari Bpk. [NAMA AYAH] & Ibu [NAMA IBU]</p>
+    </section>
+
+    <!-- ACARA -->
+    <section>
+      <h2>Detail Acara</h2>
+      
+      <div class="date-box">
+        <h3>Akad Nikah</h3>
+        <p><strong>Hari, Tanggal:</strong> [HARI], [TANGGAL]</p>
+        <p><strong>Waktu:</strong> [JAM] WIB</p>
+        <p><strong>Tempat:</strong> [NAMA GEDUNG/MASJID]</p>
+        <p>[ALAMAT LENGKAP]</p>
+        <a href="[LINK_GOOGLE_MAPS]" class="btn" target="_blank">Buka di Google Maps</a>
+      </div>
+
+      <div class="date-box">
+        <h3>Resepsi</h3>
+        <p><strong>Hari, Tanggal:</strong> [HARI], [TANGGAL]</p>
+        <p><strong>Waktu:</strong> [JAM] WIB</p>
+        <p><strong>Tempat:</strong> [NAMA GEDUNG]</p>
+        <p>[ALAMAT LENGKAP]</p>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section>
+      <h2>Konfirmasi Kehadiran</h2>
+      <p>Mohon konfirmasi kehadiran Anda sebelum [TANGGAL RSVP]</p>
+      
+      <form action="https://formspree.io/f/[KODE_FORMSPREE]" method="POST">
+        <input type="text" name="nama" placeholder="Nama Anda" required>
+        
+        <select name="kehadiran" required>
+          <option value="">Konfirmasi Kehadiran</option>
+          <option value="Hadir">Hadir</option>
+          <option value="Tidak Hadir">Tidak Hadir</option>
+        </select>
+        
+        <input type="number" name="jumlah" placeholder="Jumlah Tamu" min="1" max="5">
+        
+        <textarea name="ucapan" rows="4" placeholder="Tinggalkan ucapan & doa"></textarea>
+        
+        <button type="submit">Kirim Konfirmasi</button>
+      </form>
+      <p style="font-size: 12px; margin-top: 10px;">*Ganti [KODE_FORMSPREE] dengan kode form lo dari formspree.io biar RSVP masuk ke email</p>
+    </section>
+
+    <div class="footer">
+      <p>Terima Kasih</p>
+      <p>[NAMA PRIA] & [NAMA WANITA]</p>
+    </div>
+
+  </div>
+
+  <script>
+    function openInvitation() {
+      document.getElementById('hero').style.display = 'none';
+      document.getElementById('main').classList.add('active');
+      window.scrollTo(0,0);
+    }
+  </script>
+
+</body>
+  </html>
