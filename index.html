@@ -11,18 +11,17 @@
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
 body { background:#000; overflow-x:hidden; }
 
-/* Background foto prewed untuk semua halaman */
 .page-bg {
   position:fixed;
   inset:0;
-  background:url('https://i.postimg.cc/sxKjJtSz/images-(14).jpg') center/cover no-repeat;
+  background:url('attachment://0') center/cover no-repeat;
   z-index:-2;
 }
 .page-bg::after {
   content:'';
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,0.65);
+  background:rgba(0,0,0,0.6);
   z-index:-1;
 }
 
@@ -74,6 +73,15 @@ h2 {
   text-shadow:0 2px 10px rgba(0,0,0,0.8);
 }
 p { line-height:1.8; font-size:16px; color:#e0e0e0; text-shadow:0 1px 5px rgba(0,0,0,0.8); }
+
+.parent-info {
+  margin:20px 0;
+  font-size:15px;
+}
+.parent-info p {
+  margin:5px 0;
+  color:#ccc;
+}
 
 .countdown { 
   display:flex; 
@@ -184,10 +192,8 @@ iframe {
 </head>
 <body>
 
-<!-- Background foto prewed yang nempel di semua halaman -->
 <div class="page-bg"></div>
 
-<!-- HALAMAN COVER -->
 <div class="cover" id="cover">
   <div class="cover-content" data-aos="zoom-in" data-aos-duration="1200">
     <h1 data-aos="fade-up" data-aos-delay="400">Rudi & Yusnia</h1>
@@ -196,7 +202,6 @@ iframe {
   </div>
 </div>
 
-<!-- HALAMAN 1: SAMBUTAN -->
 <section id="sambutan">
   <div data-aos="fade-up" data-aos-duration="1000">
     <h2>Assalamu'alaikum Wr. Wb</h2>
@@ -207,13 +212,17 @@ iframe {
       <h3 style="font-family:'Great Vibes', cursive; font-size:32px; color:#d4af37; margin:10px 0;">
         Rudi & Yusnia
       </h3>
+      
+      <div class="parent-info">
+        <p>Putra dari Bapak <strong>Abdul</strong> & Ibu <strong>Khodijah</strong></p>
+        <p>Putri dari Bapak <strong>Jainal</strong> & Ibu <strong>Lasmiati</strong></p>
+      </div>
     </div>
     
     <button class="btn-buka" onclick="showSection('acara')" style="margin-top:30px;">Selanjutnya</button>
   </div>
 </section>
 
-<!-- HALAMAN 2: ACARA -->
 <section id="acara">
   <div class="event-box" data-aos="fade-right">
     <h3 style="color:#d4af37; margin-bottom:10px;">Akad Nikah</h3>
@@ -228,10 +237,9 @@ iframe {
   <button class="btn-buka" onclick="showSection('lokasi')" style="margin-top:20px;">Lihat Lokasi</button>
 </section>
 
-<!-- HALAMAN 3: MAP & COUNTDOWN -->
 <section id="lokasi">
   <h2 data-aos="fade-down">Lokasi Acara</h2>
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322283!2d106.8056223!3d-6.1947419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5d2e764b12d%3A0x3d2fe620091fd29d!2sJl.%20Slipi%20V%2C%20Slipi%2C%20Kec.%20Palmerah%2C%20Kota%20Jakarta%20Barat%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1690000!5m2!1sid!2sid" loading="lazy"></iframe>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2!2d106.8!3d-6.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5d2e764b12d%3A0x3d2fe620091fd29d!2sLokasi%20Acara!5e0!3m2!1sid!2sid!4v1690000!5m2!1sid!2sid" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   
   <h2 style="margin-top:40px;" data-aos="fade-up">Menuju Hari Bahagia</h2>
   <div class="countdown">
@@ -243,7 +251,6 @@ iframe {
   <button class="btn-buka" onclick="showSection('rsvp')">Konfirmasi Kehadiran</button>
 </section>
 
-<!-- HALAMAN 4: RSVP -->
 <section id="rsvp">
   <div data-aos="zoom-in">
     <h2>Konfirmasi Kehadiran</h2>
@@ -264,7 +271,6 @@ iframe {
   </div>
 </section>
 
-<!-- MODAL AMPLop DIGITAL -->
 <div id="amplopModal">
   <div class="amplop-content">
     <span class="close-btn" onclick="closeAmplop()">&times;</span>
