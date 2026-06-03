@@ -9,42 +9,43 @@
 
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
-body { overflow-x:hidden; background:#000; }
+body { background:#000; overflow-x:hidden; }
+
+/* Background foto prewed untuk semua halaman */
+.page-bg {
+  position:fixed;
+  inset:0;
+  background:url('https://i.postimg.cc/sxKjJtSz/images-(14).jpg') center/cover no-repeat;
+  z-index:-2;
+}
+.page-bg::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.65);
+  z-index:-1;
+}
 
 .cover {
   height:100vh;
-  position:relative;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  color:#fff;
-}
-.cover-bg {
-  position:absolute;
-  inset:0;
-  background:url('https://i.postimg.cc/sxKjJtSz/images-(14).jpg') center/cover no-repeat;
-  filter:brightness(0.4);
-}
-.cover-overlay {
-  position:absolute;
-  inset:0;
-  background:url('https://i.postimg.cc/FzgSwNV1/1780494086790.png') center/contain no-repeat;
-  mix-blend-mode:screen;
+  position:relative;
 }
 .cover-content { 
-  position:relative; 
-  z-index:2; 
   padding:20px;
+  color:#fff;
 }
 .cover h1 { 
   font-size:42px; 
   font-family:'Great Vibes', cursive; 
   color:#d4af37; 
-  margin-bottom:10px;
-  text-shadow:0 2px 10px rgba(0,0,0,0.8);
+  text-shadow:0 2px 15px rgba(0,0,0,0.9);
 }
-.cover p { margin:10px 0 25px; font-size:20px; letter-spacing:2px; text-shadow:0 2px 10px rgba(0,0,0,0.8); }
+.cover p { margin:15px 0 25px; font-size:18px; letter-spacing:2px; text-shadow:0 2px 10px rgba(0,0,0,0.9); }
+
 .btn-buka {
   padding:14px 35px;
   background:linear-gradient(135deg,#d4af37,#f9e076);
@@ -52,20 +53,16 @@ body { overflow-x:hidden; background:#000; }
   border:none;
   border-radius:50px;
   font-weight:700;
-  font-size:16px;
   cursor:pointer;
   box-shadow:0 4px 20px rgba(212,175,55,0.5);
-  transition:transform 0.3s;
 }
-.btn-buka:hover { transform:scale(1.05); }
 
 section {
   min-height:100vh;
   padding:70px 25px;
   display:none;
   text-align:center;
-  background:#0a0a0a;
-  color:#fff;
+  position:relative;
 }
 section.active { display:block; }
 
@@ -74,8 +71,9 @@ h2 {
   margin-bottom:20px; 
   font-family:'Great Vibes', cursive;
   font-size:36px;
+  text-shadow:0 2px 10px rgba(0,0,0,0.8);
 }
-p { line-height:1.8; font-size:16px; color:#e0e0e0; }
+p { line-height:1.8; font-size:16px; color:#e0e0e0; text-shadow:0 1px 5px rgba(0,0,0,0.8); }
 
 .countdown { 
   display:flex; 
@@ -85,12 +83,12 @@ p { line-height:1.8; font-size:16px; color:#e0e0e0; }
   flex-wrap:wrap;
 }
 .time-box {
-  background:linear-gradient(135deg,#1a1a2e,#2a2a4e);
-  color:#fff;
+  background:rgba(26,26,46,0.8);
   padding:18px;
   border-radius:12px;
   min-width:75px;
   border:1px solid #d4af37;
+  backdrop-filter:blur(5px);
 }
 .time-box span { 
   font-size:28px; 
@@ -104,32 +102,28 @@ input, textarea, select {
   max-width:400px;
   padding:12px;
   margin:10px auto;
-  background:#1a1a1a;
+  background:rgba(26,26,26,0.8);
   border:1px solid #333;
   border-radius:10px;
   color:#fff;
-  font-size:15px;
   display:block;
+  backdrop-filter:blur(5px);
 }
 
 .btn-wa, .btn-kirim {
-  display:inline-block;
-  margin-top:15px;
   padding:14px 30px;
   background:#25D366;
   color:#fff;
-  text-decoration:none;
+  border:none;
   border-radius:50px;
   font-weight:600;
-  font-size:16px;
-  border:none;
   cursor:pointer;
+  margin-top:15px;
 }
 
 .btn-amplop {
   background:linear-gradient(135deg,#d4af37,#f9e076);
   color:#1a1a1a;
-  margin-top:10px;
 }
 
 iframe { 
@@ -143,12 +137,13 @@ iframe {
 }
 
 .event-box {
-  background:#1a1a1a;
+  background:rgba(26,26,26,0.8);
   padding:25px;
   border-radius:15px;
   margin:20px auto;
   max-width:500px;
   border:1px solid #333;
+  backdrop-filter:blur(5px);
 }
 
 #amplopModal {
@@ -162,16 +157,17 @@ iframe {
   padding:20px;
 }
 .amplop-content {
-  background:#1a1a1a;
+  background:rgba(26,26,26,0.95);
   padding:30px;
   border-radius:20px;
   max-width:400px;
   width:100%;
   border:2px solid #d4af37;
   text-align:left;
+  backdrop-filter:blur(10px);
 }
 .rekening {
-  background:#0a0a0a;
+  background:rgba(10,10,10,0.8);
   padding:15px;
   border-radius:10px;
   margin:15px 0;
@@ -188,10 +184,11 @@ iframe {
 </head>
 <body>
 
+<!-- Background foto prewed yang nempel di semua halaman -->
+<div class="page-bg"></div>
+
 <!-- HALAMAN COVER -->
 <div class="cover" id="cover">
-  <div class="cover-bg"></div>
-  <div class="cover-overlay"></div>
   <div class="cover-content" data-aos="zoom-in" data-aos-duration="1200">
     <h1 data-aos="fade-up" data-aos-delay="400">Rudi & Yusnia</h1>
     <p data-aos="fade-up" data-aos-delay="600">03 Agustus 2026</p>
@@ -205,7 +202,7 @@ iframe {
     <h2>Assalamu'alaikum Wr. Wb</h2>
     <p>Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.</p>
     
-    <div style="margin-top:30px;" data-aos="fade-up" data-aos-delay="200">
+    <div style="margin-top:30px;">
       <p style="font-size:14px; color:#888;">Yang akan melangsungkan pernikahan</p>
       <h3 style="font-family:'Great Vibes', cursive; font-size:32px; color:#d4af37; margin:10px 0;">
         Rudi & Yusnia
@@ -218,51 +215,48 @@ iframe {
 
 <!-- HALAMAN 2: ACARA -->
 <section id="acara">
-  <div class="event-box" data-aos="fade-right" data-aos-duration="1000">
+  <div class="event-box" data-aos="fade-right">
     <h3 style="color:#d4af37; margin-bottom:10px;">Akad Nikah</h3>
     <p>Minggu, 03 Agustus 2026<br>09:00 WIB</p>
   </div>
   
-  <div class="event-box" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+  <div class="event-box" data-aos="fade-left" data-aos-delay="200">
     <h3 style="color:#d4af37; margin-bottom:10px;">Resepsi</h3>
     <p>10:00 WIB - Selesai</p>
   </div>
   
-  <button class="btn-buka" onclick="showSection('lokasi')" style="margin-top:20px;" data-aos="zoom-in" data-aos-delay="400">Lihat Lokasi</button>
+  <button class="btn-buka" onclick="showSection('lokasi')" style="margin-top:20px;">Lihat Lokasi</button>
 </section>
 
 <!-- HALAMAN 3: MAP & COUNTDOWN -->
 <section id="lokasi">
   <h2 data-aos="fade-down">Lokasi Acara</h2>
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322283!2d106.8056223!3d-6.1947419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5d2e764b12d%3A0x3d2fe620091fd29d!2sJl.%20Slipi%20V%2C%20Slipi%2C%20Kec.%20Palmerah%2C%20Kota%20Jakarta%20Barat%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1690000!5m2!1sid!2sid" loading="lazy" data-aos="zoom-in" data-aos-duration="1000"></iframe>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322283!2d106.8056223!3d-6.1947419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5d2e764b12d%3A0x3d2fe620091fd29d!2sJl.%20Slipi%20V%2C%20Slipi%2C%20Kec.%20Palmerah%2C%20Kota%20Jakarta%20Barat%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1690000!5m2!1sid!2sid" loading="lazy"></iframe>
   
   <h2 style="margin-top:40px;" data-aos="fade-up">Menuju Hari Bahagia</h2>
   <div class="countdown">
-    <div class="time-box" data-aos="flip-left" data-aos-delay="100"><span id="days">0</span>Hari</div>
-    <div class="time-box" data-aos="flip-left" data-aos-delay="200"><span id="hours">0</span>Jam</div>
-    <div class="time-box" data-aos="flip-left" data-aos-delay="300"><span id="minutes">0</span>Menit</div>
-    <div class="time-box" data-aos="flip-left" data-aos-delay="400"><span id="seconds">0</span>Detik</div>
+    <div class="time-box" data-aos="flip-left"><span id="days">0</span>Hari</div>
+    <div class="time-box" data-aos="flip-left" data-aos-delay="100"><span id="hours">0</span>Jam</div>
+    <div class="time-box" data-aos="flip-left" data-aos-delay="200"><span id="minutes">0</span>Menit</div>
+    <div class="time-box" data-aos="flip-left" data-aos-delay="300"><span id="seconds">0</span>Detik</div>
   </div>
   <button class="btn-buka" onclick="showSection('rsvp')">Konfirmasi Kehadiran</button>
 </section>
 
 <!-- HALAMAN 4: RSVP -->
 <section id="rsvp">
-  <div data-aos="zoom-in" data-aos-duration="1000">
+  <div data-aos="zoom-in">
     <h2>Konfirmasi Kehadiran</h2>
     <p>Silakan isi konfirmasi kehadiran dan doa untuk kami</p>
     
     <form id="rsvpForm">
       <input type="text" id="nama" placeholder="Nama Anda" required>
-      
       <select id="hadir" required>
         <option value="">-- Konfirmasi Kehadiran --</option>
         <option value="Hadir">Hadir</option>
         <option value="Tidak Hadir">Tidak Hadir</option>
       </select>
-      
       <textarea id="ucapan" rows="4" placeholder="Tulis ucapan & doa untuk kami..."></textarea>
-      
       <button type="submit" class="btn-kirim">Kirim via WhatsApp</button>
     </form>
     
@@ -275,27 +269,27 @@ iframe {
   <div class="amplop-content">
     <span class="close-btn" onclick="closeAmplop()">&times;</span>
     <h3 style="color:#d4af37; margin-bottom:15px;">Amplop Digital</h3>
-    <p>Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless:</p>
+    <p>Doa restu Anda sangat berarti bagi kami. Jika ingin memberi kado secara cashless:</p>
     
     <div class="rekening">
       <p style="font-size:14px; color:#888;">BCA</p>
       <p style="font-size:20px; font-weight:700; color:#d4af37;">1234567890</p>
       <p>a.n Rudi Santoso</p>
-      <button onclick="copyRek('1234567890')" style="margin-top:10px; padding:8px 15px; background:#d4af37; border:none; border-radius:8px; cursor:pointer;">Salin No. Rekening</button>
+      <button onclick="copyRek('1234567890')" style="margin-top:10px; padding:8px 15px; background:#d4af37; border:none; border-radius:8px; cursor:pointer;">Salin</button>
     </div>
     
     <div class="rekening">
       <p style="font-size:14px; color:#888;">Mandiri</p>
       <p style="font-size:20px; font-weight:700; color:#d4af37;">0987654321</p>
       <p>a.n Yusnia Putri</p>
-      <button onclick="copyRek('0987654321')" style="margin-top:10px; padding:8px 15px; background:#d4af37; border:none; border-radius:8px; cursor:pointer;">Salin No. Rekening</button>
+      <button onclick="copyRek('0987654321')" style="margin-top:10px; padding:8px 15px; background:#d4af37; border:none; border-radius:8px; cursor:pointer;">Salin</button>
     </div>
   </div>
 </div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-AOS.init({ duration: 1000, once: true, easing: 'ease-out-cubic' });
+AOS.init({ duration: 1000, once: true });
 
 const weddingDate = new Date("2026-08-03T09:00:00+07:00").getTime();
 
@@ -311,31 +305,26 @@ function showSection(id) {
   AOS.refresh();
 }
 
-// COUNTDOWN
 setInterval(() => {
   const now = new Date().getTime();
   const distance = weddingDate - now;
-  
   if(distance > 0) {
-    document.getElementById('days').innerText = Math.floor(distance / (1000*60*60*24));
-    document.getElementById('hours').innerText = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-    document.getElementById('minutes').innerText = Math.floor((distance % (1000*60*60)) / (1000*60));
-    document.getElementById('seconds').innerText = Math.floor((distance % (1000*60)) / 1000);
+    document.getElementById('days').innerText = Math.floor(distance / 86400000);
+    document.getElementById('hours').innerText = Math.floor((distance % 86400000) / 3600000);
+    document.getElementById('minutes').innerText = Math.floor((distance % 3600000) / 60000);
+    document.getElementById('seconds').innerText = Math.floor((distance % 60000) / 1000);
   }
 }, 1000);
 
-// RSVP ke WhatsApp
 document.getElementById('rsvpForm').addEventListener('submit', function(e){
   e.preventDefault();
   const nama = document.getElementById('nama').value;
   const hadir = document.getElementById('hadir').value;
   const ucapan = document.getElementById('ucapan').value;
-  
   const pesan = `Halo Rudi & Yusnia%0A%0ANama: ${nama}%0AKehadiran: ${hadir}%0AUcapan: ${ucapan}`;
   window.open(`https://wa.me/62895351432524?text=${pesan}`, '_blank');
 });
 
-// AMPLop DIGITAL
 function openAmplop(){
   document.getElementById('amplopModal').style.display='flex';
 }
