@@ -9,21 +9,31 @@
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #000; /* Hitam full */
-  color: #fff;
+html, body {
+  height: 100%;
   overflow-x: hidden;
 }
 
-/* PAGE SYSTEM */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #000;
+  color: #fff;
+}
+
+/* SEMUA HALAMAN FULLSCREEN */
 .page {
   display: none;
-  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  overflow-y: auto;
   padding: 30px 20px 100px;
 }
-.page.active { display: block; }
+.page.active {
+  display: block;
+}
 
 /* PAGE 1 - CHIBI FULL DI BELAKANG */
 #page1 {
@@ -35,20 +45,20 @@ body {
   padding-bottom: 130px;
 }
 
-/* CARD TRANSPARAN */
+/* CARD - 85% HITAM BIAR GAK TEMBUS */
 .card {
-  background: rgba(0,0,0,0.5); /* Hitam 50% biar tulisan kebaca */
+  background: rgba(0,0,0,0.85);
   padding: 25px 20px;
   border-radius: 18px;
   max-width: 500px;
   margin: 0 auto 20px;
   text-align: center;
-  border: 1px solid rgba(212,175,55,0.4);
+  border: 1px solid rgba(212,175,55,0.6);
 }
 
 h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 30px;
+  font-size: 28px;
   color: #D4AF37;
   margin: 10px 0;
 }
@@ -72,8 +82,6 @@ p { line-height: 1.6; color: #eee; margin-bottom: 10px; }
   cursor: pointer;
   font-size: 16px;
   margin-top: 15px;
-  position: relative;
-  z-index: 9999; /* Pasti di atas */
 }
 
 .btn-wa { background: #25D366; color: #fff; }
@@ -94,7 +102,7 @@ p { line-height: 1.6; color: #eee; margin-bottom: 10px; }
 }
 .countdown div {
   flex: 1;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.8);
   padding: 12px 5px;
   border-radius: 10px;
 }
@@ -116,7 +124,7 @@ input, select, textarea {
   font-family: 'Poppins', sans-serif;
 }
 
-/* NAV BOTTOM - PALING PENTING */
+/* NAV BAWAH */
 .nav-bottom {
   position: fixed;
   bottom: 0;
@@ -126,7 +134,7 @@ input, select, textarea {
   padding: 12px 0;
   display: flex;
   justify-content: space-around;
-  z-index: 10000; /* Paling atas */
+  z-index: 9999;
   border-top: 1px solid #333;
 }
 .nav-bottom button {
@@ -136,18 +144,13 @@ input, select, textarea {
   font-size: 24px;
   cursor: pointer;
   padding: 10px 25px;
-  position: relative;
-  z-index: 10001;
 }
 .nav-bottom button.active { color: #D4AF37; }
-
-/* HILANGKAN SEMUA OVERLAY */
-* { pointer-events: auto; }
 </style>
 </head>
 <body>
 
-<!-- PAGE 1 -->
+<!-- HALAMAN 1 -->
 <div class="page active" id="page1">
   <div class="card">
     <p>The Wedding Of</p>
@@ -157,13 +160,13 @@ input, select, textarea {
   </div>
 </div>
 
-<!-- PAGE 2 -->
+<!-- HALAMAN 2 -->
 <div class="page" id="page2">
   <div class="card">
     <h2>Assalamualaikum</h2>
     <p>Kami mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.</p>
   </div>
-  
+
   <div class="card">
     <h2>Mempelai</h2>
     <img src="mempelai.jpg" class="photo-couple" onerror="this.style.display='none'">
@@ -172,7 +175,7 @@ input, select, textarea {
 
   <div class="card">
     <h2>Menuju Hari Bahagia</h2>
-    <div class="countdown" id="countdown">
+    <div class="countdown">
       <div><span id="days">00</span>Hari</div>
       <div><span id="hours">00</span>Jam</div>
       <div><span id="minutes">00</span>Menit</div>
@@ -181,7 +184,7 @@ input, select, textarea {
   </div>
 </div>
 
-<!-- PAGE 3 -->
+<!-- HALAMAN 3 - DETAIL ACARA -->
 <div class="page" id="page3">
   <div class="card">
     <h2>Detail Acara</h2>
@@ -192,14 +195,14 @@ input, select, textarea {
     <p>[ALAMAT]</p>
     <a href="[LINK_GOOGLE_MAPS]" class="btn" target="_blank">Buka Lokasi</a>
   </div>
-  
+
   <div class="card">
     <h2>Lokasi</h2>
     <iframe src="[EMBED_GOOGLE_MAPS]" width="100%" height="200" style="border:0; border-radius: 12px;" loading="lazy"></iframe>
   </div>
 </div>
 
-<!-- PAGE 4 -->
+<!-- HALAMAN 4 -->
 <div class="page" id="page4">
   <div class="card">
     <h2>Konfirmasi Kehadiran</h2>
@@ -217,7 +220,7 @@ input, select, textarea {
   </div>
 </div>
 
-<!-- NAV BOTTOM -->
+<!-- NAV BAWAH -->
 <div class="nav-bottom">
   <button onclick="goToPage(1)" id="nav1" class="active"><i class="fa-solid fa-house"></i></button>
   <button onclick="goToPage(2)" id="nav2"><i class="fa-solid fa-heart"></i></button>
@@ -226,42 +229,51 @@ input, select, textarea {
 </div>
 
 <script>
-// FUNCTION GANTI HALAMAN - SIMPLE
+// FUNGSI GANTI HALAMAN - GAK SCROLL LAGI
 function goToPage(n) {
-  // Sembunyiin semua
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-bottom button').forEach(b => b.classList.remove('active'));
-  
-  // Tunjukin yang dipilih
+  // Sembunyiin semua halaman
+  var pages = document.querySelectorAll('.page');
+  for(var i=0; i<pages.length; i++) {
+    pages[i].classList.remove('active');
+  }
+
+  // Tunjukin halaman yang dipilih
   document.getElementById('page' + n).classList.add('active');
+
+  // Update nav active
+  var navs = document.querySelectorAll('.nav-bottom button');
+  for(var i=0; i<navs.length; i++) {
+    navs[i].classList.remove('active');
+  }
   document.getElementById('nav' + n).classList.add('active');
-  
-  window.scrollTo(0,0);
 }
 
 // COUNTDOWN
-const countDownDate = new Date("2025-12-25T09:00:00").getTime();
+var countDownDate = new Date("2025-12-25T09:00:00").getTime();
 setInterval(function() {
-  const now = new Date().getTime();
-  const distance = countDownDate - now;
+  var now = new Date().getTime();
+  var distance = countDownDate - now;
   if(distance > 0) {
-    document.getElementById("days").innerText = Math.floor(distance / 86400000);
-    document.getElementById("hours").innerText = Math.floor((distance % 86400000) / 3600000);
-    document.getElementById("minutes").innerText = Math.floor((distance % 3600000) / 60000);
-    document.getElementById("seconds").innerText = Math.floor((distance % 60000) / 1000);
+    document.getElementById("days").innerHTML = Math.floor(distance / 86400000);
+    document.getElementById("hours").innerHTML = Math.floor((distance % 86400000) / 3600000);
+    document.getElementById("minutes").innerHTML = Math.floor((distance % 3600000) / 60000);
+    document.getElementById("seconds").innerHTML = Math.floor((distance % 60000) / 1000);
   }
 }, 1000);
 
 // KIRIM WA
 function kirimWA() {
-  const nama = document.getElementById('nama').value;
-  const kehadiran = document.getElementById('kehadiran').value;
-  if(!nama || !kehadiran) return alert('Isi nama & kehadiran');
-  
-  const pesan = `Konfirmasi Kehadiran:%0ANama: ${nama}%0AKehadiran: ${kehadiran}%0AJumlah: ${document.getElementById('jumlah').value || 1}%0AUcapan: ${document.getElementById('ucapan').value}`;
-  window.open(`https://wa.me/[NOMOR_WA]?text=${pesan}`, '_blank');
+  var nama = document.getElementById('nama').value;
+  var kehadiran = document.getElementById('kehadiran').value;
+  if(!nama ||!kehadiran) {
+    alert('Isi nama & kehadiran dulu');
+    return;
+  }
+
+  var pesan = 'Konfirmasi Kehadiran:%0ANama: ' + nama + '%0AKehadiran: ' + kehadiran + '%0AJumlah: ' + (document.getElementById('jumlah').value || 1) + '%0AUcapan: ' + document.getElementById('ucapan').value;
+  window.open('https://wa.me/[NOMOR_WA]?text=' + pesan, '_blank');
 }
 </script>
 
 </body>
-  </html>
+      </html>
