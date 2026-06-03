@@ -30,29 +30,34 @@
       display: block; 
     }
 
+    /* PAGE 1 - GAMBAR CHIBI FULL TRANSPARAN */
     #page1 {
-      background: url('chibi.png') center/contain no-repeat;
-      background-color: #FDF6EC;
+      background: url('chibi.png') center no-repeat;
+      background-size: contain;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
-      text-align: center;
-      padding-bottom: 40px;
+      padding-bottom: 120px;
     }
 
+    /* CARD TRANSPARAN TANPA HITAM */
     .card {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 35px 25px;
+      background: transparent;
+      padding: 30px 25px;
       border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
       max-width: 600px;
       margin: 0 auto 20px;
-      border: 1px solid rgba(212, 175, 55, 0.4);
-      color: #fff;
+      text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
-    .card p, .card h3 { color: #fff; }
-    .card p { opacity: 0.9; }
+    /* PAGE 1 KARTUNYA PUNYA BACKGROUND SENDIRI */
+    #page1 .card {
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      backdrop-filter: blur(5px);
+    }
 
     .photo-couple {
       width: 180px;
@@ -67,20 +72,20 @@
     h1 {
       font-family: 'Playfair Display', serif;
       font-size: 32px;
-      color: #D4AF37;
+      color: #B8860B;
       margin-bottom: 10px;
     }
 
     h2 {
       font-family: 'Playfair Display', serif;
-      color: #D4AF37;
+      color: #B8860B;
       font-size: 26px;
       margin-bottom: 15px;
       text-align: center;
     }
 
-    h3 { color: #fff; margin-bottom: 10px; }
-    p { line-height: 1.7; margin-bottom: 12px; }
+    h3 { color: #0A192F; margin-bottom: 10px; }
+    p { line-height: 1.7; margin-bottom: 12px; color: #555; }
 
     .btn {
       display: inline-block;
@@ -95,7 +100,8 @@
       font-size: 16px;
       margin: 8px;
       position: relative;
-      z-index: 10;
+      z-index: 999;
+      pointer-events: auto;
     }
 
     .btn-wa {
@@ -111,7 +117,7 @@
       gap: 8px;
     }
     .countdown div {
-      background: rgba(0,0,0,0.8);
+      background: #0A192F;
       color: white;
       padding: 12px 8px;
       border-radius: 12px;
@@ -128,7 +134,7 @@
       width: 100%;
       padding: 12px;
       margin-bottom: 15px;
-      border: 1px solid #444;
+      border: 1px solid #DDD;
       border-radius: 8px;
       font-family: 'Poppins', sans-serif;
       background: rgba(255,255,255,0.95);
@@ -146,7 +152,6 @@
       justify-content: space-around;
       box-shadow: 0 -2px 15px rgba(0,0,0,0.15);
       z-index: 9999;
-      border-top: 1px solid #eee;
     }
     .nav-bottom button {
       background: none;
@@ -155,6 +160,7 @@
       font-size: 22px;
       cursor: pointer;
       padding: 8px 20px;
+      pointer-events: auto;
     }
     .nav-bottom button.active { 
       color: #D4AF37; 
@@ -248,36 +254,25 @@
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // Tunggu DOM ready
     document.addEventListener('DOMContentLoaded', function() {
-      AOS.init({ 
-        duration: 700, 
-        once: true,
-        disable: 'mobile' // Matikan AOS di HP biar gak lag
-      });
+      AOS.init({ duration: 700, once: true });
     });
 
     function goToPage(pageNum) {
-      // Hide semua page
       document.querySelectorAll('.page').forEach(p => {
         p.classList.remove('active');
       });
-      
-      // Show page yang dipilih
       document.getElementById('page' + pageNum).classList.add('active');
       
-      // Update nav active
       document.querySelectorAll('.nav-bottom button').forEach(b => {
         b.classList.remove('active');
       });
       document.getElementById('nav' + pageNum).classList.add('active');
       
-      // Refresh AOS biar animasi jalan lagi
       AOS.refresh();
       window.scrollTo(0,0);
     }
 
-    // Countdown
     const countDownDate = new Date("2025-12-25T09:00:00").getTime();
     const x = setInterval(function() {
       const now = new Date().getTime();
@@ -293,7 +288,6 @@
       }
     }, 1000);
 
-    // Kirim ke WhatsApp
     function kirimWA() {
       const nama = document.getElementById('nama').value;
       const kehadiran = document.getElementById('kehadiran').value;
