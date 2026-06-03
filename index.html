@@ -4,53 +4,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Undangan Pernikahan [NAMA PRIA] & [NAMA WANITA]</title>
+  
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Poppins', sans-serif;
       color: #333;
-      background: #FDF6EC;
+      background: linear-gradient(180deg, #FDF6EC 0%, #FFF 100%);
     }
 
-    /* Halaman Pembuka */
+    /* Hero Section */
     .hero {
-      height: 100vh;
-      background: url('chibi.jpg') center/cover no-repeat;
+      min-height: 100vh;
+      background: url('chibi.png') center/contain no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      position: relative;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.4);
+      padding: 20px;
     }
 
     .hero-content {
-      position: relative;
-      color: white;
-      padding: 20px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
     }
 
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 42px;
+      font-size: 38px;
+      color: #B8860B;
       margin-bottom: 10px;
     }
 
     .hero p {
-      font-size: 18px;
-      margin-bottom: 30px;
+      font-size: 16px;
+      margin-bottom: 25px;
+      color: #555;
     }
 
     .btn-open {
@@ -63,26 +60,25 @@
       border: none;
       cursor: pointer;
       font-size: 16px;
+      transition: 0.3s;
     }
+    .btn-open:hover { transform: translateY(-2px); }
 
-    /* Konten Utama */
+    /* Main Content */
     .main-content {
-      display: none;
       padding: 40px 20px;
       max-width: 700px;
       margin: 0 auto;
     }
 
-    .main-content.active {
-      display: block;
-    }
-
     section {
-      background: white;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(6px);
       padding: 30px 25px;
       margin-bottom: 25px;
       border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 1px solid rgba(212, 175, 55, 0.2);
     }
 
     h2 {
@@ -93,25 +89,38 @@
       text-align: center;
     }
 
-    h3 {
-      color: #0A192F;
-      margin-bottom: 10px;
-    }
+    h3 { color: #0A192F; margin-bottom: 10px; }
+    p { line-height: 1.7; margin-bottom: 12px; color: #555; }
 
-    p {
-      line-height: 1.7;
-      margin-bottom: 12px;
-      color: #555;
-    }
-
-    .date-box {
-      background: #FFF8E1;
-      padding: 20px;
-      border-radius: 12px;
-      border-left: 4px solid #D4AF37;
+    /* Countdown */
+    .countdown {
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
       margin: 20px 0;
     }
+    .countdown div {
+      background: #0A192F;
+      color: white;
+      padding: 15px;
+      border-radius: 12px;
+      min-width: 70px;
+    }
+    .countdown span {
+      font-size: 28px;
+      font-weight: 600;
+      color: #D4AF37;
+      display: block;
+    }
 
+    /* Buttons */
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 15px;
+    }
     .btn {
       display: inline-block;
       background: #D4AF37;
@@ -120,10 +129,11 @@
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
-      margin-top: 10px;
+      transition: 0.3s;
     }
+    .btn:hover { background: #E6C757; }
 
-    /* Form RSVP */
+    /* Form */
     form input, form select, form textarea {
       width: 100%;
       padding: 12px;
@@ -131,8 +141,8 @@
       border: 1px solid #DDD;
       border-radius: 8px;
       font-family: 'Poppins', sans-serif;
+      background: rgba(255,255,255,0.8);
     }
-
     form button {
       width: 100%;
       background: #0A192F;
@@ -143,10 +153,6 @@
       font-weight: 600;
       cursor: pointer;
       font-size: 16px;
-    }
-
-    form button:hover {
-      background: #112240;
     }
 
     .footer {
@@ -161,11 +167,11 @@
 
   <!-- HALAMAN PEMBUKA -->
   <div class="hero" id="hero">
-    <div class="hero-content">
+    <div class="hero-content" data-aos="fade-up">
       <p>The Wedding Of</p>
       <h1>[NAMA PRIA] & [NAMA WANITA]</h1>
       <p>[TANGGAL]</p>
-      <button class="btn-open" onclick="openInvitation()">Buka Undangan</button>
+      <button class="btn-open" onclick="document.getElementById('main').scrollIntoView()">Buka Undangan</button>
     </div>
   </div>
 
@@ -173,67 +179,83 @@
   <div class="main-content" id="main">
     
     <!-- KATA SAMBUTAN -->
-    <section>
+    <section data-aos="fade-up">
       <h2>Assalamualaikum Warahmatullahi Wabarakatuh</h2>
       <p>Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.</p>
       <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
     </section>
 
+    <!-- COUNTDOWN -->
+    <section data-aos="fade-up">
+      <h2>Menuju Hari Bahagia</h2>
+      <div class="countdown" id="countdown">
+        <div><span id="days">00</span>Hari</div>
+        <div><span id="hours">00</span>Jam</div>
+        <div><span id="minutes">00</span>Menit</div>
+        <div><span id="seconds">00</span>Detik</div>
+      </div>
+    </section>
+
     <!-- MEMPELAI -->
-    <section style="text-align: center;">
+    <section style="text-align: center;" data-aos="fade-up">
       <h2>Mempelai</h2>
       <h3>[NAMA LENGKAP PRIA]</h3>
       <p>Putra dari Bpk. [NAMA AYAH] & Ibu [NAMA IBU]</p>
-      
       <p style="font-size: 24px; margin: 20px 0;">&</p>
-      
       <h3>[NAMA LENGKAP WANITA]</h3>
       <p>Putri dari Bpk. [NAMA AYAH] & Ibu [NAMA IBU]</p>
     </section>
 
     <!-- ACARA -->
-    <section>
+    <section id="acara" data-aos="fade-up">
       <h2>Detail Acara</h2>
       
-      <div class="date-box">
+      <div style="margin-bottom: 20px;">
         <h3>Akad Nikah</h3>
         <p><strong>Hari, Tanggal:</strong> [HARI], [TANGGAL]</p>
         <p><strong>Waktu:</strong> [JAM] WIB</p>
         <p><strong>Tempat:</strong> [NAMA GEDUNG/MASJID]</p>
         <p>[ALAMAT LENGKAP]</p>
-        <a href="[LINK_GOOGLE_MAPS]" class="btn" target="_blank">Buka di Google Maps</a>
       </div>
 
-      <div class="date-box">
-        <h3>Resepsi</h3>
-        <p><strong>Hari, Tanggal:</strong> [HARI], [TANGGAL]</p>
-        <p><strong>Waktu:</strong> [JAM] WIB</p>
-        <p><strong>Tempat:</strong> [NAMA GEDUNG]</p>
-        <p>[ALAMAT LENGKAP]</p>
+      <div class="btn-group">
+        <a href="#lokasi" class="btn">Lihat Lokasi</a>
+        <a href="[LINK_CALENDAR]" class="btn">Simpan Kalender</a>
+      </div>
+    </section>
+
+    <!-- LOKASI -->
+    <section id="lokasi" data-aos="fade-up">
+      <h2>Lokasi Acara</h2>
+      <iframe 
+        src="[EMBED_GOOGLE_MAPS]" 
+        width="100%" 
+        height="250" 
+        style="border:0; border-radius: 12px;" 
+        allowfullscreen="" 
+        loading="lazy">
+      </iframe>
+      <div class="btn-group">
+        <a href="[LINK_GOOGLE_MAPS]" class="btn" target="_blank">Buka di Google Maps</a>
       </div>
     </section>
 
     <!-- RSVP -->
-    <section>
+    <section data-aos="fade-up">
       <h2>Konfirmasi Kehadiran</h2>
-      <p>Mohon konfirmasi kehadiran Anda sebelum [TANGGAL RSVP]</p>
+      <p>Mohon konfirmasi sebelum [TANGGAL RSVP]</p>
       
       <form action="https://formspree.io/f/[KODE_FORMSPREE]" method="POST">
         <input type="text" name="nama" placeholder="Nama Anda" required>
-        
         <select name="kehadiran" required>
           <option value="">Konfirmasi Kehadiran</option>
           <option value="Hadir">Hadir</option>
           <option value="Tidak Hadir">Tidak Hadir</option>
         </select>
-        
         <input type="number" name="jumlah" placeholder="Jumlah Tamu" min="1" max="5">
-        
         <textarea name="ucapan" rows="4" placeholder="Tinggalkan ucapan & doa"></textarea>
-        
         <button type="submit">Kirim Konfirmasi</button>
       </form>
-      <p style="font-size: 12px; margin-top: 10px;">*Ganti [KODE_FORMSPREE] dengan kode form lo dari formspree.io biar RSVP masuk ke email</p>
     </section>
 
     <div class="footer">
@@ -243,12 +265,27 @@
 
   </div>
 
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    function openInvitation() {
-      document.getElementById('hero').style.display = 'none';
-      document.getElementById('main').classList.add('active');
-      window.scrollTo(0,0);
-    }
+    AOS.init({ duration: 1000, once: true });
+
+    // Countdown
+    const countDownDate = new Date("[TAHUN]-[BULAN]-[TANGGAL]T[JAM]:00:00").getTime();
+    
+    const x = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
+      
+      document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+      document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "<h3>Acara Sedang Berlangsung</h3>";
+      }
+    }, 1000);
   </script>
 
 </body>
