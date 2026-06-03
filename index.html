@@ -22,18 +22,17 @@
     .page {
       display: none;
       min-height: 100vh;
+      width: 100%;
       padding: 40px 20px 110px;
-      animation: fadeIn 0.4s ease;
+      position: relative;
     }
-    .page.active { display: block; }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
+    .page.active { 
+      display: block; 
     }
 
     #page1 {
       background: url('chibi.png') center/contain no-repeat;
+      background-color: #FDF6EC;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -42,17 +41,18 @@
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.6);
       padding: 35px 25px;
       border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
       max-width: 600px;
       margin: 0 auto 20px;
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      position: relative;
-      z-index: 1;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: #fff;
     }
+
+    .card p, .card h3 { color: #fff; }
+    .card p { opacity: 0.9; }
 
     .photo-couple {
       width: 180px;
@@ -67,20 +67,20 @@
     h1 {
       font-family: 'Playfair Display', serif;
       font-size: 32px;
-      color: #B8860B;
+      color: #D4AF37;
       margin-bottom: 10px;
     }
 
     h2 {
       font-family: 'Playfair Display', serif;
-      color: #B8860B;
+      color: #D4AF37;
       font-size: 26px;
       margin-bottom: 15px;
       text-align: center;
     }
 
-    h3 { color: #0A192F; margin-bottom: 10px; }
-    p { line-height: 1.7; margin-bottom: 12px; color: #555; }
+    h3 { color: #fff; margin-bottom: 10px; }
+    p { line-height: 1.7; margin-bottom: 12px; }
 
     .btn {
       display: inline-block;
@@ -94,9 +94,9 @@
       cursor: pointer;
       font-size: 16px;
       margin: 8px;
-      transition: 0.3s;
+      position: relative;
+      z-index: 10;
     }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212,175,55,0.4); }
 
     .btn-wa {
       background: #25D366;
@@ -111,7 +111,7 @@
       gap: 8px;
     }
     .countdown div {
-      background: #0A192F;
+      background: rgba(0,0,0,0.8);
       color: white;
       padding: 12px 8px;
       border-radius: 12px;
@@ -128,10 +128,11 @@
       width: 100%;
       padding: 12px;
       margin-bottom: 15px;
-      border: 1px solid #DDD;
+      border: 1px solid #444;
       border-radius: 8px;
       font-family: 'Poppins', sans-serif;
-      background: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.95);
+      color: #333;
     }
 
     .nav-bottom {
@@ -154,7 +155,6 @@
       font-size: 22px;
       cursor: pointer;
       padding: 8px 20px;
-      transition: 0.2s;
     }
     .nav-bottom button.active { 
       color: #D4AF37; 
@@ -177,7 +177,7 @@
   <!-- PAGE 2: MEMPELAI -->
   <div class="page" id="page2">
     <div class="card" data-aos="fade-up">
-      <h2>Assalamualaikum Warahmatullahi Wabarakatuh</h2>
+      <h2>Assalamualaikum</h2>
       <p>Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.</p>
     </div>
 
@@ -185,7 +185,6 @@
       <h2>Mempelai</h2>
       <img src="mempelai.jpg" alt="Mempelai" class="photo-couple" onerror="this.style.display='none'">
       <h3 style="text-align:center;">[NAMA LENGKAP PRIA] & [NAMA LENGKAP WANITA]</h3>
-      <p style="text-align:center;">Putra/Putri dari keluarga [NAMA KELUARGA]</p>
     </div>
 
     <div class="card" data-aos="fade-up">
@@ -221,7 +220,7 @@
   <div class="page" id="page4">
     <div class="card" data-aos="fade-up">
       <h2>Konfirmasi Kehadiran</h2>
-      <p>Silakan isi form di bawah ini, lalu klik tombol WhatsApp untuk mengirim konfirmasi.</p>
+      <p>Silakan isi form di bawah ini, lalu klik tombol WhatsApp.</p>
       
       <form id="rsvpForm">
         <input type="text" id="nama" placeholder="Nama Anda" required>
@@ -249,15 +248,32 @@
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({ duration: 700, once: true });
+    // Tunggu DOM ready
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({ 
+        duration: 700, 
+        once: true,
+        disable: 'mobile' // Matikan AOS di HP biar gak lag
+      });
+    });
 
     function goToPage(pageNum) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      // Hide semua page
+      document.querySelectorAll('.page').forEach(p => {
+        p.classList.remove('active');
+      });
+      
+      // Show page yang dipilih
       document.getElementById('page' + pageNum).classList.add('active');
       
-      document.querySelectorAll('.nav-bottom button').forEach(b => b.classList.remove('active'));
+      // Update nav active
+      document.querySelectorAll('.nav-bottom button').forEach(b => {
+        b.classList.remove('active');
+      });
       document.getElementById('nav' + pageNum).classList.add('active');
       
+      // Refresh AOS biar animasi jalan lagi
+      AOS.refresh();
       window.scrollTo(0,0);
     }
 
@@ -289,15 +305,8 @@
         return;
       }
 
-      const pesan = `Assalamualaikum%0A%0A
-Konfirmasi Kehadiran:%0A
-Nama: ${nama}%0A
-Kehadiran: ${kehadiran}%0A
-Jumlah Tamu: ${jumlah}%0A
-Ucapan: ${ucapan}%0A%0A
-Terima kasih.`;
-
-      const noWA = '[NOMOR_WA]'; // Format 628xxxxxxxxxx tanpa +
+      const pesan = `Assalamualaikum%0A%0AKonfirmasi Kehadiran:%0ANama: ${nama}%0AKehadiran: ${kehadiran}%0AJumlah Tamu: ${jumlah}%0AUcapan: ${ucapan}%0A%0ATerima kasih.`;
+      const noWA = '[NOMOR_WA]'; 
       window.open(`https://wa.me/${noWA}?text=${pesan}`, '_blank');
     }
   </script>
