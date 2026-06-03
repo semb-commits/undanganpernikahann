@@ -10,75 +10,53 @@
   
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
+    
     body {
       font-family: 'Poppins', sans-serif;
       color: #333;
-      background: linear-gradient(180deg, #FDF6EC 0%, #FFF 100%);
+      background: #FDF6EC;
+      overflow-x: hidden;
     }
 
-    /* Hero Section */
-    .hero {
+    /* Page System */
+    .page {
+      display: none;
       min-height: 100vh;
+      padding: 40px 20px;
+      animation: fadeIn 0.5s ease;
+    }
+    .page.active { display: block; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Page 1 - Pembuka */
+    #page1 {
       background: url('chibi.png') center/contain no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 20px;
     }
 
-    .hero-content {
+    .card {
       background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(8px);
       padding: 40px 30px;
       border-radius: 20px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 0 auto;
+      border: 1px solid rgba(212, 175, 55, 0.3);
     }
 
-    .hero h1 {
+    h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 38px;
+      font-size: 36px;
       color: #B8860B;
       margin-bottom: 10px;
-    }
-
-    .hero p {
-      font-size: 16px;
-      margin-bottom: 25px;
-      color: #555;
-    }
-
-    .btn-open {
-      background: #D4AF37;
-      color: #0A192F;
-      padding: 14px 32px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      transition: 0.3s;
-    }
-    .btn-open:hover { transform: translateY(-2px); }
-
-    /* Main Content */
-    .main-content {
-      padding: 40px 20px;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    section {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(6px);
-      padding: 30px 25px;
-      margin-bottom: 25px;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-      border: 1px solid rgba(212, 175, 55, 0.2);
     }
 
     h2 {
@@ -89,8 +67,28 @@
       text-align: center;
     }
 
-    h3 { color: #0A192F; margin-bottom: 10px; }
     p { line-height: 1.7; margin-bottom: 12px; color: #555; }
+
+    .btn {
+      display: inline-block;
+      background: #D4AF37;
+      color: #0A192F;
+      padding: 14px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 8px;
+      transition: 0.3s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212,175,55,0.4); }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #D4AF37;
+      color: #D4AF37;
+    }
 
     /* Countdown */
     .countdown {
@@ -102,36 +100,16 @@
     .countdown div {
       background: #0A192F;
       color: white;
-      padding: 15px;
+      padding: 12px;
       border-radius: 12px;
-      min-width: 70px;
+      min-width: 65px;
     }
     .countdown span {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 600;
       color: #D4AF37;
       display: block;
     }
-
-    /* Buttons */
-    .btn-group {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 15px;
-    }
-    .btn {
-      display: inline-block;
-      background: #D4AF37;
-      color: #0A192F;
-      padding: 12px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-    .btn:hover { background: #E6C757; }
 
     /* Form */
     form input, form select, form textarea {
@@ -155,135 +133,156 @@
       font-size: 16px;
     }
 
-    .footer {
-      text-align: center;
-      padding: 30px 20px;
+    /* Nav bottom */
+    .nav-bottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-around;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      z-index: 100;
+    }
+    .nav-bottom button {
+      background: none;
+      border: none;
       color: #777;
       font-size: 14px;
+      cursor: pointer;
     }
+    .nav-bottom button.active { color: #D4AF37; font-weight: 600; }
+
+    .content-padding { padding-bottom: 80px; }
   </style>
 </head>
 <body>
 
-  <!-- HALAMAN PEMBUKA -->
-  <div class="hero" id="hero">
-    <div class="hero-content" data-aos="fade-up">
+  <!-- PAGE 1: PEMBUKA -->
+  <div class="page active" id="page1">
+    <div class="card" data-aos="fade-up">
       <p>The Wedding Of</p>
       <h1>[NAMA PRIA] & [NAMA WANITA]</h1>
       <p>[TANGGAL]</p>
-      <button class="btn-open" onclick="document.getElementById('main').scrollIntoView()">Buka Undangan</button>
+      <button class="btn" onclick="goToPage(2)">Buka Undangan</button>
     </div>
   </div>
 
-  <!-- KONTEN UTAMA -->
-  <div class="main-content" id="main">
-    
-    <!-- KATA SAMBUTAN -->
-    <section data-aos="fade-up">
-      <h2>Assalamualaikum Warahmatullahi Wabarakatuh</h2>
-      <p>Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.</p>
-      <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
-    </section>
-
-    <!-- COUNTDOWN -->
-    <section data-aos="fade-up">
-      <h2>Menuju Hari Bahagia</h2>
-      <div class="countdown" id="countdown">
-        <div><span id="days">00</span>Hari</div>
-        <div><span id="hours">00</span>Jam</div>
-        <div><span id="minutes">00</span>Menit</div>
-        <div><span id="seconds">00</span>Detik</div>
+  <!-- PAGE 2: MEMPELAI & SAMBUTAN -->
+  <div class="page" id="page2">
+    <div class="content-padding">
+      <div class="card" data-aos="fade-up">
+        <h2>Assalamualaikum Warahmatullahi Wabarakatuh</h2>
+        <p>Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.</p>
+        <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
       </div>
-    </section>
 
-    <!-- MEMPELAI -->
-    <section style="text-align: center;" data-aos="fade-up">
-      <h2>Mempelai</h2>
-      <h3>[NAMA LENGKAP PRIA]</h3>
-      <p>Putra dari Bpk. [NAMA AYAH] & Ibu [NAMA IBU]</p>
-      <p style="font-size: 24px; margin: 20px 0;">&</p>
-      <h3>[NAMA LENGKAP WANITA]</h3>
-      <p>Putri dari Bpk. [NAMA AYAH] & Ibu [NAMA IBU]</p>
-    </section>
+      <div class="card" data-aos="fade-up" style="margin-top: 20px;">
+        <h2>Mempelai</h2>
+        <h3 style="text-align:center;">[NAMA LENGKAP PRIA]</h3>
+        <p style="text-align:center;">Putra dari Bpk. [NAMA AYAH] & Ibu [NAMA IBU]</p>
+        
+        <p style="text-align:center; font-size: 24px; margin: 20px 0;">&</p>
+        
+        <h3 style="text-align:center;">[NAMA LENGKAP WANITA]</h3>
+        <p style="text-align:center;">Putri dari Bpk. [NAMA AYAH] & Ibu [NAMA IBU]</p>
+      </div>
 
-    <!-- ACARA -->
-    <section id="acara" data-aos="fade-up">
-      <h2>Detail Acara</h2>
-      
-      <div style="margin-bottom: 20px;">
+      <div class="card" data-aos="fade-up" style="margin-top: 20px;">
+        <h2>Menuju Hari Bahagia</h2>
+        <div class="countdown" id="countdown">
+          <div><span id="days">00</span>Hari</div>
+          <div><span id="hours">00</span>Jam</div>
+          <div><span id="minutes">00</span>Menit</div>
+          <div><span id="seconds">00</span>Detik</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: ACARA, LOKASI, RSVP -->
+  <div class="page" id="page3">
+    <div class="content-padding">
+      <div class="card" data-aos="fade-up">
+        <h2>Detail Acara</h2>
         <h3>Akad Nikah</h3>
         <p><strong>Hari, Tanggal:</strong> [HARI], [TANGGAL]</p>
         <p><strong>Waktu:</strong> [JAM] WIB</p>
         <p><strong>Tempat:</strong> [NAMA GEDUNG/MASJID]</p>
         <p>[ALAMAT LENGKAP]</p>
+        
+        <div style="margin-top: 20px;">
+          <button class="btn" onclick="goToPage(3)">Ini Bagian Acara</button>
+          <a href="[LINK_GOOGLE_MAPS]" class="btn btn-outline" target="_blank">Ini Lokasi</a>
+        </div>
       </div>
 
-      <div class="btn-group">
-        <a href="#lokasi" class="btn">Lihat Lokasi</a>
-        <a href="[LINK_CALENDAR]" class="btn">Simpan Kalender</a>
+      <div class="card" data-aos="fade-up" style="margin-top: 20px;">
+        <h2>Lokasi Acara</h2>
+        <iframe 
+          src="[EMBED_GOOGLE_MAPS]" 
+          width="100%" 
+          height="220" 
+          style="border:0; border-radius: 12px;" 
+          loading="lazy">
+        </iframe>
       </div>
-    </section>
 
-    <!-- LOKASI -->
-    <section id="lokasi" data-aos="fade-up">
-      <h2>Lokasi Acara</h2>
-      <iframe 
-        src="[EMBED_GOOGLE_MAPS]" 
-        width="100%" 
-        height="250" 
-        style="border:0; border-radius: 12px;" 
-        allowfullscreen="" 
-        loading="lazy">
-      </iframe>
-      <div class="btn-group">
-        <a href="[LINK_GOOGLE_MAPS]" class="btn" target="_blank">Buka di Google Maps</a>
+      <div class="card" data-aos="fade-up" style="margin-top: 20px;">
+        <h2>Konfirmasi Kehadiran</h2>
+        <form action="https://formspree.io/f/[KODE_FORMSPREE]" method="POST">
+          <input type="text" name="nama" placeholder="Nama Anda" required>
+          <select name="kehadiran" required>
+            <option value="">Konfirmasi Kehadiran</option>
+            <option value="Hadir">Hadir</option>
+            <option value="Tidak Hadir">Tidak Hadir</option>
+          </select>
+          <input type="number" name="jumlah" placeholder="Jumlah Tamu" min="1" max="5">
+          <textarea name="ucapan" rows="3" placeholder="Ucapan & doa"></textarea>
+          <button type="submit">Kirim</button>
+        </form>
       </div>
-    </section>
-
-    <!-- RSVP -->
-    <section data-aos="fade-up">
-      <h2>Konfirmasi Kehadiran</h2>
-      <p>Mohon konfirmasi sebelum [TANGGAL RSVP]</p>
-      
-      <form action="https://formspree.io/f/[KODE_FORMSPREE]" method="POST">
-        <input type="text" name="nama" placeholder="Nama Anda" required>
-        <select name="kehadiran" required>
-          <option value="">Konfirmasi Kehadiran</option>
-          <option value="Hadir">Hadir</option>
-          <option value="Tidak Hadir">Tidak Hadir</option>
-        </select>
-        <input type="number" name="jumlah" placeholder="Jumlah Tamu" min="1" max="5">
-        <textarea name="ucapan" rows="4" placeholder="Tinggalkan ucapan & doa"></textarea>
-        <button type="submit">Kirim Konfirmasi</button>
-      </form>
-    </section>
-
-    <div class="footer">
-      <p>Terima Kasih</p>
-      <p>[NAMA PRIA] & [NAMA WANITA]</p>
     </div>
+  </div>
 
+  <!-- NAV BOTTOM -->
+  <div class="nav-bottom">
+    <button onclick="goToPage(1)" id="nav1" class="active">Home</button>
+    <button onclick="goToPage(2)" id="nav2">Mempelai</button>
+    <button onclick="goToPage(3)" id="nav3">Acara</button>
   </div>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({ duration: 1000, once: true });
+    AOS.init({ duration: 800, once: true });
+
+    // Pindah Halaman
+    function goToPage(pageNum) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page' + pageNum).classList.add('active');
+      
+      document.querySelectorAll('.nav-bottom button').forEach(b => b.classList.remove('active'));
+      document.getElementById('nav' + pageNum).classList.add('active');
+      
+      window.scrollTo(0,0);
+    }
 
     // Countdown
     const countDownDate = new Date("[TAHUN]-[BULAN]-[TANGGAL]T[JAM]:00:00").getTime();
-    
     const x = setInterval(function() {
       const now = new Date().getTime();
       const distance = countDownDate - now;
       
-      document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-      document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
-      
-      if (distance < 0) {
-        clearInterval(x);
+      if(distance > 0) {
+        document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+        document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+      } else {
         document.getElementById("countdown").innerHTML = "<h3>Acara Sedang Berlangsung</h3>";
+        clearInterval(x);
       }
     }, 1000);
   </script>
